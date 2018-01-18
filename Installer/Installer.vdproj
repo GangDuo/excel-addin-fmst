@@ -16,13 +16,13 @@
         "Entry"
         {
         "MsmKey" = "8:_20A7C551B1B7DD4B2CDF04449B8432B4"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_274BA497AEC13DE15192F2B98600B11F"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -34,13 +34,13 @@
         "Entry"
         {
         "MsmKey" = "8:_88AD5C84F66F3CAE15CA7D34AE8019AB"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_88ADF164947E9F53E2D97BFB3FB9D2A0"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -81,20 +81,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "MsmKey" = "8:_F33BB629576B469682826882D6E2C053"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F8E8D1F9517A582AB4467BE29331DC0D"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F945B9A663A955DF2140E4791FDF5D21"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E4C17CC752BF4EA19454194606B063A9"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -170,6 +170,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -194,6 +202,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -216,7 +232,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.6.1"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=671728"
                 }
@@ -538,7 +554,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Installer"
         "ProductCode" = "8:{4E815358-D9D9-44E1-B241-87FE7A70224D}"
-        "PackageCode" = "8:{17838A30-78ED-410E-A204-EBDC332E937C}"
+        "PackageCode" = "8:{55A15B71-528A-47E8-BA41-75A13BB6B388}"
         "UpgradeCode" = "8:{51C9178E-91D3-4947-AC70-811BC03FD15B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1057,7 +1073,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E4C17CC752BF4EA19454194606B063A9"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F33BB629576B469682826882D6E2C053"
             {
             "SourcePath" = "8:..\\FMst\\obj\\Release\\FMst.dll"
             "TargetName" = "8:"
@@ -1077,7 +1093,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Release|Any CPU"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{C1E641FF-8AE1-40E1-A683-AA585BE3EA44}"
             "ShowKeyOutput" = "11:TRUE"
