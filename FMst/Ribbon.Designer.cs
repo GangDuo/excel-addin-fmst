@@ -37,7 +37,7 @@
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.skeleton = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
@@ -55,18 +55,19 @@
             // group1
             // 
             this.group1.DialogLauncher = ribbonDialogLauncherImpl1;
-            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.skeleton);
             this.group1.Items.Add(this.button2);
             this.group1.Items.Add(this.button3);
             this.group1.Label = "HT取込ﾂｰﾙ";
             this.group1.Name = "group1";
             // 
-            // button1
+            // skeleton
             // 
-            this.button1.Label = "スケルトン";
-            this.button1.Name = "button1";
-            this.button1.OfficeImageId = "PlusSign";
-            this.button1.ShowImage = true;
+            this.skeleton.Label = "スケルトン";
+            this.skeleton.Name = "skeleton";
+            this.skeleton.OfficeImageId = "PlusSign";
+            this.skeleton.ShowImage = true;
+            this.skeleton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.skeleton_Click);
             // 
             // button2
             // 
@@ -100,7 +101,7 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton skeleton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
     }
