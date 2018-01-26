@@ -58,12 +58,6 @@
         "Entry"
         {
         "MsmKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
-        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
         "OwnerKey" = "8:_88ADF164947E9F53E2D97BFB3FB9D2A0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -71,6 +65,12 @@
         {
         "MsmKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
         "OwnerKey" = "8:_F945B9A663A955DF2140E4791FDF5D21"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
+        "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -95,12 +95,6 @@
         {
         "MsmKey" = "8:_F945B9A663A955DF2140E4791FDF5D21"
         "OwnerKey" = "8:_F33BB629576B469682826882D6E2C053"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_88ADF164947E9F53E2D97BFB3FB9D2A0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,13 +130,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
+        "OwnerKey" = "8:_20A7C551B1B7DD4B2CDF04449B8432B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_20A7C551B1B7DD4B2CDF04449B8432B4"
+        "OwnerKey" = "8:_88ADF164947E9F53E2D97BFB3FB9D2A0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9B951FB20EF1D20E04458CB771859A0C"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -232,7 +232,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.6"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=671728"
                 }
