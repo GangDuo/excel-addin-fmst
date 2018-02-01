@@ -38,7 +38,7 @@
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.skeleton = this.Factory.CreateRibbonButton();
-            this.button2 = this.Factory.CreateRibbonButton();
+            this.booking = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -56,7 +56,7 @@
             // 
             this.group1.DialogLauncher = ribbonDialogLauncherImpl1;
             this.group1.Items.Add(this.skeleton);
-            this.group1.Items.Add(this.button2);
+            this.group1.Items.Add(this.booking);
             this.group1.Items.Add(this.button3);
             this.group1.Label = "HT取込ﾂｰﾙ";
             this.group1.Name = "group1";
@@ -69,12 +69,13 @@
             this.skeleton.ShowImage = true;
             this.skeleton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.skeleton_Click);
             // 
-            // button2
+            // booking
             // 
-            this.button2.Label = "当日予約";
-            this.button2.Name = "button2";
-            this.button2.OfficeImageId = "Schedule";
-            this.button2.ShowImage = true;
+            this.booking.Label = "当日予約";
+            this.booking.Name = "booking";
+            this.booking.OfficeImageId = "Schedule";
+            this.booking.ShowImage = true;
+            this.booking.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.booking_Click);
             // 
             // button3
             // 
@@ -102,7 +103,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton skeleton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton booking;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
     }
 

@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using Native = Microsoft.Office.Interop;
 using Host = Microsoft.Office.Tools;
+using System.Diagnostics;
+using System.Threading;
 
 namespace FMst
 {
@@ -38,6 +40,16 @@ namespace FMst
             };
             v.SetDataBinding("店舗", "SKU", "数量");
             Worksheets.Add(v);
+        }
+
+        private async void booking_Click(object sender, RibbonControlEventArgs e)
+        {
+            Debug.WriteLine("booking_Click: {0}", Thread.CurrentThread.ManagedThreadId);
+            var order = new WebAPI.Order();
+            Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(d =>
+            {
+                System.Windows.Forms.MessageBox.Show("予約完了");
+            }, await order.Scheduled2Tonight());
         }
     }
 }

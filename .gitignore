@@ -4,3 +4,6 @@
 /FMst/FMst_TemporaryKey.pfx
 /Installer/Release
 /Installer/Debug
+/FMst.WebAPI/obj
+/FMst.WebAPI/bin
+/FMst/webapi.config
