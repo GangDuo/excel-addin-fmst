@@ -7,6 +7,7 @@ using Native = Microsoft.Office.Interop;
 using Host = Microsoft.Office.Tools;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 
 namespace FMst
 {
@@ -45,7 +46,11 @@ namespace FMst
         private async void booking_Click(object sender, RibbonControlEventArgs e)
         {
             Debug.WriteLine("booking_Click: {0}", Thread.CurrentThread.ManagedThreadId);
-            var order = new WebAPI.Order();
+            var buf = "content";
+            var order = new WebAPI.Order()
+            {
+                File = new MemoryStream(Encoding.UTF8.GetBytes(buf))
+            };
             Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(d =>
             {
                 System.Windows.Forms.MessageBox.Show("予約完了");
