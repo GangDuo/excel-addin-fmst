@@ -11,10 +11,6 @@ namespace FMst.WebAPI
 {
     public class Order
     {
-        public class SomeResponse
-        {
-            public HttpResponseMessage Raw { get; set; }
-        }
         private static HttpClient client = new HttpClient();
 
         public Stream File { get; set; }
@@ -53,7 +49,7 @@ namespace FMst.WebAPI
             return ownerName;
         }
 
-        public async Task<SomeResponse> Scheduled2Tonight()
+        public async Task<ResponseMessage> Scheduled2Tonight()
         {
             var content = new MultipartFormDataContent();
             new List<HttpContent>()
@@ -66,13 +62,13 @@ namespace FMst.WebAPI
             });
 
             var res = await client.PostAsync(Endpoint, content);
-            return new SomeResponse() { Raw = res };
+            return new ResponseMessage(res);
         }
 
-        public async Task<SomeResponse> AsSoonAsPossible()
+        public async Task<ResponseMessage> AsSoonAsPossible()
         {
             await Task.Delay(TimeSpan.FromSeconds(10));
-            return new SomeResponse();
+            return new ResponseMessage(null);
         }
     }
 }

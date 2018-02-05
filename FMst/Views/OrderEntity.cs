@@ -10,7 +10,7 @@ namespace FMst.Views
 {
     class OrderEntity
     {
-        public DataTable DataContext { get; set; }
+        public object DataContext { get; set; }
         private Host.Excel.ListObject list1;
 
         public OrderEntity(Host.Excel.Worksheet worksheet)
@@ -28,6 +28,11 @@ namespace FMst.Views
         {
             list1.AutoSetDataBoundColumnHeaders = true;
             list1.SetDataBinding(DataContext, null, mappedColumns);
+        }
+
+        public void Disconnect()
+        {
+            list1.Disconnect();
         }
     }
 }

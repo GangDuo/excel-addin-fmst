@@ -8,6 +8,10 @@ using Host = Microsoft.Office.Tools;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
+using System.Collections;
+using System.ComponentModel;
+using FMst.Models;
+using System.Windows.Forms;
 
 namespace FMst
 {
@@ -21,15 +25,7 @@ namespace FMst
 
         private void skeleton_Click(object sender, RibbonControlEventArgs e)
         {
-            var table = new System.Data.DataTable();
-            table.Columns.AddRange(new System.Data.DataColumn[]
-            {
-                new System.Data.DataColumn("店舗", typeof(string)),
-                new System.Data.DataColumn("SKU", typeof(string)),
-                new System.Data.DataColumn("数量", typeof(int))
-            });
-            //table.Rows.Add("Nancy", "Anderson", 1);
-            //table.Rows.Add("Robert", "Brown", 1);
+            var table = new BindingList<Order>();
 
             // 新規シート追加
             Native.Excel.Worksheet newWorksheet = (Native.Excel.Worksheet)Globals.ThisAddIn.Application.Worksheets.Add();
@@ -39,22 +35,35 @@ namespace FMst
             {
                 DataContext = table
             };
-            v.SetDataBinding("店舗", "SKU", "数量");
+            v.SetDataBinding(typeof(Order).GetProperties().Select(x => x.Name).ToArray());
             Worksheets.Add(v);
         }
 
         private async void booking_Click(object sender, RibbonControlEventArgs e)
         {
             Debug.WriteLine("booking_Click: {0}", Thread.CurrentThread.ManagedThreadId);
-            var buf = "content";
-            var order = new WebAPI.Order()
+
+            foreach (var sheet in Worksheets)
             {
-                File = new MemoryStream(Encoding.UTF8.GetBytes(buf))
-            };
-            Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(d =>
-            {
-                System.Windows.Forms.MessageBox.Show("予約完了");
-            }, await order.Scheduled2Tonight());
+                var model = sheet.DataContext as BindingList<Order>;
+                var ms = new MemoryStream();
+                model.WriteToTextCsvStream(ms);
+                var order = new WebAPI.Order()
+                {
+                    File = ms
+                };
+                Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(d =>
+                {
+                    ms.Close();
+
+                    var res = (WebAPI.ResponseMessage)d;
+                    if (res.IsSuccess)
+                    {
+                        sheet.Disconnect();
+                    }
+                    MessageBox.Show(res.IsSuccess ? "予約完了" : res.Reason);
+                }, await order.Scheduled2Tonight());
+            }
         }
     }
 }
