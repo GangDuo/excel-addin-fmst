@@ -40,6 +40,7 @@
             this.skeleton = this.Factory.CreateRibbonButton();
             this.booking = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.twitter = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.group1.Items.Add(this.skeleton);
             this.group1.Items.Add(this.booking);
             this.group1.Items.Add(this.button3);
+            this.group1.Items.Add(this.twitter);
             this.group1.Label = "HT取込ﾂｰﾙ";
             this.group1.Name = "group1";
             // 
@@ -84,6 +86,12 @@
             this.button3.OfficeImageId = "QueryRunQuery";
             this.button3.ShowImage = true;
             // 
+            // twitter
+            // 
+            this.twitter.Label = "twitter";
+            this.twitter.Name = "twitter";
+            this.twitter.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.twitter_Click);
+            // 
             // Ribbon
             // 
             this.Name = "Ribbon";
@@ -105,6 +113,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton skeleton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton booking;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton twitter;
     }
 
     partial class ThisRibbonCollection

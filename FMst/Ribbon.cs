@@ -65,5 +65,10 @@ namespace FMst
                 }, await order.Scheduled2Tonight());
             }
         }
+
+        private void twitter_Click(object sender, RibbonControlEventArgs e)
+        {
+            Process.Start(Globals.ThisAddIn.Twitter);
+        }
     }
 }

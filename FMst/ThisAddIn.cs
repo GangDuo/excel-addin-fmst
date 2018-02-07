@@ -9,19 +9,25 @@ using Microsoft.Office.Tools.Excel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace FMst
 {
     public partial class ThisAddIn
     {
         public SynchronizationContext TheWindowsFormsSynchronizationContext { get; private set; }
+        public string Twitter { get; private set; }
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             TheWindowsFormsSynchronizationContext = WindowsFormsSynchronizationContext.Current ?? new WindowsFormsSynchronizationContext();
 
-            var appSettings = System.Configuration.ConfigurationManager.AppSettings;
-            WebAPI.Config.Instance.FullyQualifiedDomainName = appSettings["domain"];
+            var appSettings = ConfigurationManager.AppSettings;
+            Twitter = appSettings["twitter"];
+
+            var webApiSetting = (NameValueCollection)ConfigurationManager.GetSection("webApiSetting");
+            WebAPI.Config.Instance.FullyQualifiedDomainName = webApiSetting["domain"].Trim();
             WebAPI.WebAPIClient.Initialize();
         }
 
