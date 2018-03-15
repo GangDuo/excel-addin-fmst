@@ -37,10 +37,10 @@
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.skeleton = this.Factory.CreateRibbonButton();
-            this.booking = this.Factory.CreateRibbonButton();
-            this.button3 = this.Factory.CreateRibbonButton();
-            this.twitter = this.Factory.CreateRibbonButton();
+            this.Skeleton = this.Factory.CreateRibbonButton();
+            this.Booking = this.Factory.CreateRibbonButton();
+            this.AsSoonAsPossible = this.Factory.CreateRibbonButton();
+            this.Twitter = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -56,41 +56,42 @@
             // group1
             // 
             this.group1.DialogLauncher = ribbonDialogLauncherImpl1;
-            this.group1.Items.Add(this.skeleton);
-            this.group1.Items.Add(this.booking);
-            this.group1.Items.Add(this.button3);
-            this.group1.Items.Add(this.twitter);
+            this.group1.Items.Add(this.Skeleton);
+            this.group1.Items.Add(this.Booking);
+            this.group1.Items.Add(this.AsSoonAsPossible);
+            this.group1.Items.Add(this.Twitter);
             this.group1.Label = "HT取込ﾂｰﾙ";
             this.group1.Name = "group1";
             // 
-            // skeleton
+            // Skeleton
             // 
-            this.skeleton.Label = "スケルトン";
-            this.skeleton.Name = "skeleton";
-            this.skeleton.OfficeImageId = "PlusSign";
-            this.skeleton.ShowImage = true;
-            this.skeleton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.skeleton_Click);
+            this.Skeleton.Label = "スケルトン";
+            this.Skeleton.Name = "Skeleton";
+            this.Skeleton.OfficeImageId = "PlusSign";
+            this.Skeleton.ShowImage = true;
+            this.Skeleton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Skeleton_Click);
             // 
-            // booking
+            // Booking
             // 
-            this.booking.Label = "当日予約";
-            this.booking.Name = "booking";
-            this.booking.OfficeImageId = "Schedule";
-            this.booking.ShowImage = true;
-            this.booking.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.booking_Click);
+            this.Booking.Label = "当日予約";
+            this.Booking.Name = "Booking";
+            this.Booking.OfficeImageId = "Schedule";
+            this.Booking.ShowImage = true;
+            this.Booking.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Booking_Click);
             // 
-            // button3
+            // AsSoonAsPossible
             // 
-            this.button3.Label = "即時実行";
-            this.button3.Name = "button3";
-            this.button3.OfficeImageId = "QueryRunQuery";
-            this.button3.ShowImage = true;
+            this.AsSoonAsPossible.Label = "即時実行";
+            this.AsSoonAsPossible.Name = "AsSoonAsPossible";
+            this.AsSoonAsPossible.OfficeImageId = "QueryRunQuery";
+            this.AsSoonAsPossible.ShowImage = true;
+            this.AsSoonAsPossible.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AsSoonAsPossible_Click);
             // 
-            // twitter
+            // Twitter
             // 
-            this.twitter.Label = "twitter";
-            this.twitter.Name = "twitter";
-            this.twitter.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.twitter_Click);
+            this.Twitter.Label = "twitter";
+            this.Twitter.Name = "Twitter";
+            this.Twitter.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Twitter_Click);
             // 
             // Ribbon
             // 
@@ -110,10 +111,10 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton skeleton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton booking;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton twitter;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton Skeleton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton Booking;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton AsSoonAsPossible;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton Twitter;
     }
 
     partial class ThisRibbonCollection

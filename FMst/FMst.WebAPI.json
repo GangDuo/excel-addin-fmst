@@ -1,0 +1,192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.0",
+    "title": "FMst.WebAPI"
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/jobs.json": {
+      "get": {
+        "operationId": "getAllJobs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobCollection"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createJob",
+        "description": "hoge",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "job[raw]",
+            "type": "file",
+            "required": true,
+            "description": "The file to upload.",
+            "x-mimetype": "text/csv"
+          },
+          {
+            "in": "formData",
+            "name": "job[owner_name]",
+            "type": "string",
+            "required": false,
+            "description": "Description of file contents."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobEntity"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/JobEntity"
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{id}.json": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "integer",
+          "minimum": 1,
+          "description": "Parameter description in Markdown."
+        }
+      ],
+      "get": {
+        "operationId": "getJobById",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobEntity"
+            }
+          },
+          "404": {
+            "description": "Job not found"
+          }
+        }
+      },
+      "put": {
+        "operationId": "editJobById",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteJobById",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/launchers.json": {
+      "get": {
+        "operationId": "getAllLaunchers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "operationId": "launch",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "launcher[job_id]",
+            "type": "integer",
+            "minimum": 1,
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Launcher"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Launcher"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobCollection": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/JobEntity"
+      }
+    },
+    "JobEntity": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The user ID."
+        },
+        "raw_id": {
+          "type": "integer",
+          "description": "The user ID."
+        },
+        "raw_filename": {
+          "type": "string"
+        },
+        "raw_content_type": {
+          "type": "string"
+        },
+        "owner_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "Launcher": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

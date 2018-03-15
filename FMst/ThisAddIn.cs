@@ -28,7 +28,6 @@ namespace FMst
 
             var webApiSetting = (NameValueCollection)ConfigurationManager.GetSection("webApiSetting");
             WebAPI.Config.Instance.FullyQualifiedDomainName = webApiSetting["domain"].Trim();
-            WebAPI.WebAPIClient.Initialize();
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

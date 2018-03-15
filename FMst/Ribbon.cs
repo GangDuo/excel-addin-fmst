@@ -11,19 +11,48 @@ using System.IO;
 using System.Collections;
 using System.ComponentModel;
 using FMst.Models;
+using FMst.WebAPI.AutoRest;
 using System.Windows.Forms;
+using Microsoft.Rest;
+using System.Text.RegularExpressions;
 
 namespace FMst
 {
     public partial class Ribbon
     {
         private List<Views.OrderEntity> Worksheets = new List<Views.OrderEntity>();
+        private FMstWebAPI WebAPI;
+        private static readonly string OwnerName = String.Join("@", Environment.UserName, Environment.MachineName);
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
+            WebAPI = new FMstWebAPI(new WebAPI.AnonymousCredential())
+            {
+                BaseUri = FMst.WebAPI.Config.Instance.BaseUri
+            };
         }
 
-        private void skeleton_Click(object sender, RibbonControlEventArgs e)
+        private void DisconnectAllModel()
+        {
+            Worksheets.ForEach(sheet => sheet.Disconnect());
+        }
+
+        private List<Order> MergeModel()
+        {
+            return Worksheets.Aggregate(new List<Order>(), (ax, sheet) =>
+            {
+                var model = sheet.DataContext as BindingList<Order>;
+                ax.AddRange(model);
+                return ax;
+            });
+        }
+
+        private void Twitter_Click(object sender, RibbonControlEventArgs e)
+        {
+            Process.Start(Globals.ThisAddIn.Twitter);
+        }
+
+        private void Skeleton_Click(object sender, RibbonControlEventArgs e)
         {
             var table = new BindingList<Order>();
 
@@ -39,36 +68,81 @@ namespace FMst
             Worksheets.Add(v);
         }
 
-        private async void booking_Click(object sender, RibbonControlEventArgs e)
+        private void Booking_Click(object sender, RibbonControlEventArgs e)
         {
             Debug.WriteLine("booking_Click: {0}", Thread.CurrentThread.ManagedThreadId);
-
-            foreach (var sheet in Worksheets)
+            // 統合
+            var model = MergeModel();
+            if (model.Count == 0)
             {
-                var model = sheet.DataContext as BindingList<Order>;
-                var ms = new MemoryStream();
-                model.WriteToTextCsvStream(ms);
-                var order = new WebAPI.Order()
-                {
-                    File = ms
-                };
-                Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(d =>
-                {
-                    ms.Close();
+                MessageBox.Show("登録できるデータはありません。");
+                return;
+            }
+            // convert stream
+            var path = Path.GetTempFileName();
+            FileStream fs = File.Create(path);
+            model.WriteToTextCsvStream(fs);
 
-                    var res = (WebAPI.ResponseMessage)d;
-                    if (res.IsSuccess)
-                    {
-                        sheet.Disconnect();
-                    }
-                    MessageBox.Show(res.IsSuccess ? "予約完了" : res.Reason);
-                }, await order.Scheduled2Tonight());
+            try
+            {
+                var job = WebAPI.CreateJob(fs, OwnerName);
+                MessageBox.Show("予約完了");
+            }
+            catch(HttpOperationException ex)
+            {
+                MessageBox.Show(ex.Response.ReasonPhrase);
+            }
+            catch(SerializationException ex)
+            {
+                MessageBox.Show(ex.Content);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                fs.Close();
+                File.Delete(path);
             }
         }
 
-        private void twitter_Click(object sender, RibbonControlEventArgs e)
+        private void AsSoonAsPossible_Click(object sender, RibbonControlEventArgs e)
         {
-            Process.Start(Globals.ThisAddIn.Twitter);
+            var model = MergeModel();
+            if (model.Count == 0)
+            {
+                MessageBox.Show("登録できるデータはありません。");
+                return;
+            }
+            // convert stream
+            var path = Path.GetTempFileName();
+            FileStream fs = File.Create(path);
+            model.WriteToTextCsvStream(fs);
+
+            try
+            {
+                var job = WebAPI.CreateJob(fs, OwnerName);
+                var l = WebAPI.Launch(job.Id);
+                MessageBox.Show(Regex.Unescape(l.Result));
+            }
+            catch (HttpOperationException ex)
+            {
+                MessageBox.Show(ex.Response.ReasonPhrase);
+            }
+            catch (SerializationException ex)
+            {
+                MessageBox.Show(ex.Content);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                fs.Close();
+                File.Delete(path);
+            }
         }
     }
 }
