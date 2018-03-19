@@ -22,5 +22,70 @@ namespace FMst.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.ComponentModel.Category("個人情報")]
+        public string MailAddress {
+            get {
+                return ((string)(this["MailAddress"]));
+            }
+            set {
+                this["MailAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.ComponentModel.Category("サーバ情報")]
+        public string SmtpUserName {
+            get {
+                return ((string)(this["SmtpUserName"]));
+            }
+            set {
+                this["SmtpUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.ComponentModel.Category("サーバ情報")]
+        [System.ComponentModel.PasswordPropertyText(true)]
+        public string SmtpPassword {
+            get {
+                return ((string)(this["SmtpPassword"]));
+            }
+            set {
+                this["SmtpPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.ComponentModel.Category("サーバ情報")]
+        public string SmtpHost {
+            get {
+                return ((string)(this["SmtpHost"]));
+            }
+            set {
+                this["SmtpHost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Recipient {
+            get {
+                return ((string)(this["Recipient"]));
+            }
+            set {
+                this["Recipient"] = value;
+            }
+        }
     }
 }

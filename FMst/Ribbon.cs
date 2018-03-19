@@ -23,10 +23,30 @@ namespace FMst
         {
         }
 
+        private void DisconnectAllModel()
+        {
+            Worksheets.ForEach(sheet => sheet.Disconnect());
+        }
+
+        private void ClearAllModel()
+        {
+            Worksheets.ForEach(sheet => (sheet.DataContext as BindingList<Order>).Clear());
+        }
+
+        private List<Order> MergeModel()
+        {
+            return Worksheets.Aggregate(new List<Order>(), (ax, sheet) =>
+            {
+                var model = sheet.DataContext as BindingList<Order>;
+                ax.AddRange(model);
+                return ax;
+            });
+        }
+
         private void skeleton_Click(object sender, RibbonControlEventArgs e)
         {
             var table = new BindingList<Order>();
-
+            
             // 新規シート追加
             Native.Excel.Worksheet newWorksheet = (Native.Excel.Worksheet)Globals.ThisAddIn.Application.Worksheets.Add();
             Host.Excel.Worksheet worksheet = Globals.Factory.GetVstoObject(newWorksheet);
@@ -39,36 +59,48 @@ namespace FMst
             Worksheets.Add(v);
         }
 
+        private IList<WebAPI.Models.Order> ConvertWebModel()
+        {
+            return MergeModel().Select(a => new WebAPI.Models.Order() { Store = a.店舗, Sku = a.SKU, Quantity = a.数量 }).ToArray();
+        }
+
+        private void group1_DialogLauncherClick(object sender, RibbonControlEventArgs e)
+        {
+            var form = new Views.Forms.UserSettings();
+            form.ShowDialog();
+        }
+
+        private void SendOrPostCallback(object state)
+        {
+            var res = (WebAPI.Controllers.ResponseMessage)state;
+            if (res.IsSuccess)
+            {
+                DisconnectAllModel();
+                ClearAllModel();
+            }
+            MessageBox.Show(res.Reason);
+        }
+
         private async void booking_Click(object sender, RibbonControlEventArgs e)
         {
             Debug.WriteLine("booking_Click: {0}", Thread.CurrentThread.ManagedThreadId);
 
-            foreach (var sheet in Worksheets)
+            var order = new WebAPI.Controllers.Order()
             {
-                var model = sheet.DataContext as BindingList<Order>;
-                var ms = new MemoryStream();
-                model.WriteToTextCsvStream(ms);
-                var order = new WebAPI.Order()
-                {
-                    File = ms
-                };
-                Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(d =>
-                {
-                    ms.Close();
-
-                    var res = (WebAPI.ResponseMessage)d;
-                    if (res.IsSuccess)
-                    {
-                        sheet.Disconnect();
-                    }
-                    MessageBox.Show(res.IsSuccess ? "予約完了" : res.Reason);
-                }, await order.Scheduled2Tonight());
-            }
+                Payload = ConvertWebModel()
+            };
+            Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(SendOrPostCallback,
+                await order.Create(WebAPI.Controllers.OrderMode.AtTonight));
         }
 
-        private void twitter_Click(object sender, RibbonControlEventArgs e)
+        private async void button3_Click(object sender, RibbonControlEventArgs e)
         {
-            Process.Start(Globals.ThisAddIn.Twitter);
+            var order = new WebAPI.Controllers.Order()
+            {
+                Payload = ConvertWebModel()
+            };
+            Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(SendOrPostCallback,
+                await order.Create(WebAPI.Controllers.OrderMode.AsSoonAsPossible));
         }
     }
 }
