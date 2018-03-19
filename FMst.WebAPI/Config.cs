@@ -8,11 +8,11 @@ namespace FMst.WebAPI
 {
     public sealed class Config
     {
-        public string FullyQualifiedDomainName { get; set; }
-        public Uri BaseUri
-        {
-            get { return new UriBuilder(Uri.UriSchemeHttps, FullyQualifiedDomainName).Uri; }
-        }
+        public string MailAddress { get; set; }
+        public string SmtpUserName { get; set; }
+        public string SmtpPassword { get; set; }
+        public string SmtpHost { get; set; }
+        public string Recipient { get; set; }
 
         private static volatile Config instance;
         private static object syncRoot = new Object();

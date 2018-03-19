@@ -19,7 +19,16 @@ namespace FMst
         public SynchronizationContext TheWindowsFormsSynchronizationContext { get; private set; }
         public string Twitter { get; private set; }
 
-        private void ThisAddIn_Startup(object sender, System.EventArgs e)
+        public static void LoadUserSettings()
+        {
+            WebAPI.Config.Instance.MailAddress = Properties.Settings.Default.MailAddress.Trim();
+            WebAPI.Config.Instance.SmtpUserName = Properties.Settings.Default.SmtpUserName.Trim();
+            WebAPI.Config.Instance.SmtpPassword = Properties.Settings.Default.SmtpPassword.Trim();
+            WebAPI.Config.Instance.SmtpHost = Properties.Settings.Default.SmtpHost.Trim();
+            WebAPI.Config.Instance.Recipient = Properties.Settings.Default.Recipient.Trim();
+        }
+
+        private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             TheWindowsFormsSynchronizationContext = WindowsFormsSynchronizationContext.Current ?? new WindowsFormsSynchronizationContext();
 
@@ -27,11 +36,11 @@ namespace FMst
             Twitter = appSettings["twitter"];
 
             var webApiSetting = (NameValueCollection)ConfigurationManager.GetSection("webApiSetting");
-            WebAPI.Config.Instance.FullyQualifiedDomainName = webApiSetting["domain"].Trim();
+            LoadUserSettings();
             WebAPI.WebAPIClient.Initialize();
         }
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
+        private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
         }
 
