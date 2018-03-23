@@ -20,6 +20,12 @@ namespace FMst.Views.Forms
         private void UserSettings_Load(object sender, EventArgs e)
         {
             propertyGrid1.SelectedObject = Properties.Settings.Default;
+
+            if (String.IsNullOrEmpty(Properties.Settings.Default.MailAddress))
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.Save();
+            }
         }
 
         private void UserSettings_FormClosed(object sender, FormClosedEventArgs e)
