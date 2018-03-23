@@ -17,7 +17,7 @@ namespace FMst.WebAPI.Controllers
     {
         public IList<Models.Order> Payload { get; set; }
         
-        public async Task<ResponseMessage> Create(OrderMode mode)
+        public async Task<ResponseMessage> Create(Models.OrderMode mode)
         {
             bool isSuccess = false;
             var reason = "予約完了";
@@ -25,10 +25,12 @@ namespace FMst.WebAPI.Controllers
             {
                 isSuccess = await new Models.Envelope
                 {
-                    AppName = "FMst for excel",
-                    Action = Enum.GetName(typeof(OrderMode), mode).ToUpperSnakeCase(),
-                    Token = Guid.NewGuid().ToString("N"),
-                    Payload = this.Payload
+                    Action = "/order/create",
+                    Payload = new Models.Payload()
+                    {
+                        Mode = mode,
+                        Order = this.Payload
+                    }
                 }.Send();
             }
             catch (Exception ex)

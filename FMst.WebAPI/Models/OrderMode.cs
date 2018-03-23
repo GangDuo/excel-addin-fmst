@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FMst.WebAPI.Controllers
+namespace FMst.WebAPI.Models
 {
     public enum OrderMode
     {

@@ -90,7 +90,7 @@ namespace FMst
                 Payload = ConvertWebModel()
             };
             Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(SendOrPostCallback,
-                await order.Create(WebAPI.Controllers.OrderMode.AtTonight));
+                await order.Create(WebAPI.Models.OrderMode.AtTonight));
         }
 
         private async void button3_Click(object sender, RibbonControlEventArgs e)
@@ -100,7 +100,7 @@ namespace FMst
                 Payload = ConvertWebModel()
             };
             Globals.ThisAddIn.TheWindowsFormsSynchronizationContext.Send(SendOrPostCallback,
-                await order.Create(WebAPI.Controllers.OrderMode.AsSoonAsPossible));
+                await order.Create(WebAPI.Models.OrderMode.AsSoonAsPossible));
         }
     }
 }

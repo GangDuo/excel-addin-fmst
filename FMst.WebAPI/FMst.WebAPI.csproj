@@ -49,7 +49,8 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Controllers\Order.cs" />
-    <Compile Include="Controllers\OrderMode.cs" />
+    <Compile Include="Models\OrderMode.cs" />
+    <Compile Include="Models\Payload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ResponseMessage.cs" />
     <Compile Include="WebAPIClient.cs" />

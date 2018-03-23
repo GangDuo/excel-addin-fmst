@@ -10,18 +10,14 @@ namespace FMst.WebAPI.Models
 {
     internal class Envelope
     {
-        [JsonProperty("appName")]
-        public string AppName { get; set; }
         [JsonProperty("action")]
         public string Action { get; set; }
-        [JsonProperty("token")]
-        public string Token { get; set; }
         [JsonProperty("data")]
-        public IList<Models.Order> Payload { get; set; }
+        public Payload Payload { get; set; }
 
         public async Task<bool> Send()
         {
-            if (Payload.Count == 0) throw new InvalidOperationException("送信件数0件");
+            if (Payload.Order.Count == 0) throw new InvalidOperationException("送信件数0件");
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
             Debug.WriteLine(json);
             return await SendEmail(json);
