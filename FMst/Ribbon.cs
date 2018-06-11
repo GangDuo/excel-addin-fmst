@@ -77,6 +77,7 @@ namespace FMst
             {
                 DisconnectAllModel();
                 ClearAllModel();
+                Worksheets.Clear();
             }
             MessageBox.Show(res.Reason);
         }
